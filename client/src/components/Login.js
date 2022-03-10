@@ -1,6 +1,7 @@
-import React, {useRef, useState} from 'react'
+import React, {useRef, useState} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-//import jwt from "jwt-decode"
+import axios from 'axios'
+import jwt from "jwt-decode"
 function Login({accounts}) {
 
 const [logInUname, updateLogInUname] = useState("") 
@@ -24,6 +25,29 @@ const logIn = () =>{
     window.location.href = '/' 
     }
 
+let postLogin = (event) =>{
+  event.preventDefault()
+
+  const logged = "login";
+
+   axios.post('http://localhost:4000/login', logged)
+  //.then(response => console.log(response.data))
+  .then((response) =>{
+    
+    const loggedIn = jwt(response.data.user)
+    if (loggedIn){// true or false check
+      localStorage.setItem('pula', response.data.user)
+      alert(`Logged in as ${loggedIn.username}`)
+      window.location.href="/"
+    } else {
+      alert("Username and/or Password incorrect!")
+  }
+    console.log(response.data)
+  })
+
+}
+
+
     return (
        
 <section className="vh-100 gradient-custom">
@@ -33,7 +57,7 @@ const logIn = () =>{
         <div className="card bg-dark text-white" >
           <div className="card-body p-5 text-center">
 
-            <form onSubmit={logIn} className="mb-md-5 mt-md-4 pb-5">
+            <form  className="mb-md-5 mt-md-4 pb-5">
 
               <h2 className="fw-bold mb-2 text-uppercase">Login</h2>
               <p className="text-white-50 mb-5">Please enter your login and password!</p>
@@ -53,15 +77,15 @@ const logIn = () =>{
                 <label className="form-label" htmlFor="typePasswordX">Password</label>
               </div>
 
-              <p class="small mb-5 pb-lg-2"><a class="text-white-50" href="#!">Forgot password?</a></p>
+              <p className="small mb-5 pb-lg-2"><a className="text-white-50" href="#!">Forgot password?</a></p>
 
-              <button className="btn btn-outline-light btn-lg px-5" type="submit">Login</button>
+              <button className="btn btn-outline-light btn-lg px-5" onClick={postLogin}>Login</button>
 
              
             </form>
 
             <div>
-              <p className="mb-0">Don't have an account? <a href="#!" className="text-white-50 fw-bold">Sign Up</a></p>
+              <p className="mb-0">Don't have an account? <a href="/register" className="text-white-50 fw-bold">Sign Up</a></p>
             </div>
 
           </div>
