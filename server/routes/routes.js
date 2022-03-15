@@ -53,11 +53,25 @@ router.post('/login', async(request, response) => {
 
 })
 
-router.post('/deal', async (req, res)=> { // this is used to post articles in the database of the user signed in
-    //response.send('send')
-    const users = await signUpTemplateCopy.find({})
+router.post('/deal', async (req, res)=> { // this is used to deal and distribute cards to players playing
+   
+    let players = req.body
+    
+   const users =  await signUpTemplateCopy.find({ $or:[
+          {username : {$eq : players[0]}},
+          {username: {$eq:players[1]}},
+          {username: {$eq:players[2]}},
+          {username: {$eq:players[3]}},
+          {username: {$eq:players[4]}},
+          {username: {$eq:players[5]}},
+          {username: {$eq:players[6]}},
+          {username: {$eq:players[7]}}
+        ]
+    })
+  
+    //const users = await signUpTemplateCopy.find({ username: "genju" })
 
-     //console.log(user[0].cards)
+     console.log(users)
   let results = deal(users.length)
   
    if(users){
