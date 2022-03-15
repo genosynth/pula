@@ -7,7 +7,7 @@ import logo from './plogo.png';
 
 ReactDOM.render(
   <React.StrictMode>
-     <img alt="pool-logo" src={logo}/>
+     <img alt="pool-logo" className="logo" src={logo}/>
     <App />
   </React.StrictMode>,
   document.getElementById('root')

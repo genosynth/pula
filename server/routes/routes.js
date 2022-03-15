@@ -2,9 +2,10 @@ const express = require('express')
 const router = express.Router()
 const signUpTemplateCopy = require('../models/dbModel.js')
 const jwt = require("jsonwebtoken")
+const deal = require("../models/deal")
 
 router.get('/', (req, res) => {
-    res.send("HelloWorld")
+    res.send("HelloWorld") // testing that server is up
 
 })
 
@@ -12,11 +13,11 @@ router.get('/', (req, res) => {
 router.post('/sign', (request, response) => {
     //response.send('send')
     const signedUpUser = new signUpTemplateCopy({
-        fullName: "Jean Pierre",
-        username: "genju",
-        password: "genju",
-        email: "genju@genju.com",
-        dob: "30/06/1992"
+        fullName: request.body.fullName,
+        username: request.body.username,
+        password: request.body.password,
+        email: request.body.email,
+        dob: request.body.dob
 
     })
 
@@ -35,8 +36,8 @@ router.post('/sign', (request, response) => {
 router.post('/login', async(request, response) => {
     //response.send('send')
    const user = await signUpTemplateCopy.findOne({
-       username: "genju",//request.body.username, 
-       password: "genju" //request.body.password
+       username: request.body.username, 
+       password: request.body.password
     })
 
     if(user){
@@ -51,5 +52,27 @@ router.post('/login', async(request, response) => {
     } else {return response.json({status:"error", user:false})}
 
 })
+
+router.post('/deal', async (req, res)=> { // this is used to post articles in the database of the user signed in
+    //response.send('send')
+    const users = await signUpTemplateCopy.find({})
+
+     //console.log(user[0].cards)
+  let results = deal(users.length)
+  
+   if(users){
+    let i = 0;
+    users.forEach((el)=>{
+        el.cards=results[i]
+        el.save()
+        i+=1
+    })
+    return res.json({status:"ok"})
+      /* users[0].cards=[distributed[0], distributed[1]]
+      console.log(user[0].cards)
+      users[0].save()
+      return res.json({status:"ok"}) */
+   } else {return res.json({status:"error", users:false})}
+  })
 
 module.exports = router

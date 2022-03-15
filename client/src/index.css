@@ -12,12 +12,14 @@ code {
     monospace;
 }
 
-img {
-  width:500px; 
+.logo {
+  width:200px; 
 }
 
+
+
 #root {
-  background-color: black;
+background-color: black;
 padding: 2%;
 text-align: center;
 }

@@ -26,25 +26,25 @@ const logIn = () =>{
     }
 
 let postLogin = (event) =>{
-  event.preventDefault()
+  event.preventDefault()  
 
-  const logged = "login";
-
-   axios.post('http://localhost:4000/login', logged)
-  //.then(response => console.log(response.data))
+  const logged = {username: logInUname, password:logInPassword};
+  
+   axios.post('http://192.168.0.180:4000/login', logged)  // OR LOCALHOST!!
   .then((response) =>{
-    
+    //alert("hi")
+    if(response.data.status==="error") { return alert("Username and/or Password incorrect!")}
+    console.log(response)
     const loggedIn = jwt(response.data.user)
-    if (loggedIn){// true or false check
+    if (loggedIn.username){// true or false check
       localStorage.setItem('pula', response.data.user)
       alert(`Logged in as ${loggedIn.username}`)
       window.location.href="/"
-    } else {
-      alert("Username and/or Password incorrect!")
-  }
-    console.log(response.data)
+    }     
+  
+    //console.log(response.data)
   })
-
+  
 }
 
 
