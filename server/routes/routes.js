@@ -13,11 +13,11 @@ router.get('/', (req, res) => {
 router.post('/sign', (request, response) => {
     //response.send('send')
     const signedUpUser = new signUpTemplateCopy({
-        fullName: request.body.fullName,
+        //fullName: request.body.fullName,
         username: request.body.username,
         password: request.body.password,
-        email: request.body.email,
-        dob: request.body.dob
+        //email: request.body.email,
+        //dob: request.body.dob
 
     })
 
@@ -45,7 +45,7 @@ router.post('/login', async(request, response) => {
         const token = jwt.sign({
             username:user.username,
             cards:user.cards,
-            email:user.email
+            //email:user.email
         }, 'secretqwerty')
         console.log(user)
         return response.json({status: 'ok', user:token})
@@ -57,30 +57,32 @@ router.post('/deal', async (req, res)=> { // this is used to deal and distribute
    
     let players = req.body
     
-   const users =  await signUpTemplateCopy.find({ $or:[
-          {username : {$eq : players[0]}},
-          {username: {$eq:players[1]}},
-          {username: {$eq:players[2]}},
-          {username: {$eq:players[3]}},
-          {username: {$eq:players[4]}},
-          {username: {$eq:players[5]}},
-          {username: {$eq:players[6]}},
-          {username: {$eq:players[7]}}
-        ]
-    })
+   const users =  await signUpTemplateCopy.find()
   
     //const users = await signUpTemplateCopy.find({ username: "genju" })
 
      console.log(users)
-  let results = deal(users.length)
+    let results = deal(players.length)
   
    if(users){
     let i = 0;
     users.forEach((el)=>{
-        el.cards=results[i]
+        
+        for (let z=0; z<players.length; z++){
+            if (el.username === players[z]){
+                el.cards=results[i] 
+                i++
+                el.save()
+                return
+            }
+
+        }
+        el.cards=[];
         el.save()
-        i+=1
+        /*el.cards=results[i]        
+        i+=1 */
     })
+    
     return res.json({status:"ok"})
       /* users[0].cards=[distributed[0], distributed[1]]
       console.log(user[0].cards)

@@ -6,31 +6,33 @@ function Register() {
 
   const [signUsername, updateSignUsername] = useState("");
   const [signPassword, updateSignPassword] = useState("");
-  const [signFname, updateSignFname] = useState("");
-  const [signDOB, updateSignDOB] = useState("");
-  const [signEmail, updateSignEmail] = useState("");
+  const [SignConfPassword, updateSignConfPassword] = useState("");
+  
+  
 
 
 
   const uname = useRef();
   const password = useRef();
-  const fname = useRef();
-  const dob = useRef();
-  const email = useRef()
+  const confPassword = useRef();
+
+
 
 
   const signUp = (event) => {
     event.preventDefault()
-    const registered = {fullName: signFname, username:signUsername, password: signPassword, email: signEmail, dob: signDOB};
+
+    if (signPassword!==SignConfPassword) return alert("Passwords do not match!")
+    const registered = { username:signUsername, password: signPassword};
   
-    axios.post('http://192.168.0.180:4000/sign', registered)    // OR LOCALHOST!!
+    axios.post('http://192.168.0.145:4000/sign', registered)    // OR LOCALHOST!!
     .then((response) => {
       console.log(response)
-      if(response.data.email){
+      if(response.data.username){
       alert("Registered succesfully!")
        return window.location.href="/"
       //console.log(response)
-      } else{ alert("Username and/or Email already in use! Please use another username and/or email.")}
+      } else{ alert("Username already in use! Please use another username.")}
     })
 
   }
@@ -49,14 +51,7 @@ function Register() {
               <h2 className="fw-bold mb-2 text-uppercase">Register</h2>
               <p className="text-white-50 mb-5">Please enter the required information!</p>
 
-              <div className="form-outline form-white mb-4">               
-                <input ref={fname} placeholder='Full Name' className="form-control form-control-lg" onChange={()=>{
-                updateSignFname(fname.current.value)
-            }}></input>
-                <label className="form-label" htmlFor="typeFullNameX">Full Name</label>
-              </div>
               
-
               <div className="form-outline form-white mb-4">               
                 <input ref={uname} placeholder='username' required className="form-control form-control-lg" onChange={()=>{
                 updateSignUsername(uname.current.value)
@@ -72,21 +67,18 @@ function Register() {
             }}></input>
                 <label className="form-label" htmlFor="typePasswordX">Password</label>
               </div>
+              
 
-              <div className="form-outline form-white mb-4">               
-                <input ref={email} placeholder='Email Address' required type="email" className="form-control form-control-lg" onChange={()=>{
-                updateSignEmail(email.current.value)
-            }}></input>
-                <label className="form-label" htmlFor="typeEmailX">Email</label>
-              </div>
+              <div className="form-outline form-white mb-4">
+               
+               <input ref={confPassword} placeholder ="confirm password" type="password" required className="form-control form-control-lg" onChange={()=>{
+                updateSignConfPassword(confPassword.current.value)
+           }}></input>
+               <label className="form-label" htmlFor="typePasswordX">Confirm Password</label>
+             </div>
 
-              <div className="form-outline form-white mb-4">               
-                <input ref={dob} placeholder='Date Of Birth' type="date" className="form-control form-control-lg" onChange={()=>{
-                updateSignDOB(dob.current.value)
-            }}></input>
-                <label className="form-label" htmlFor="typeDateX">DOB</label>
-              </div>
 
+        
           
               <button className="btn btn-outline-light btn-lg px-5" type="submit">Register</button>
 

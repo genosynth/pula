@@ -30,7 +30,7 @@ let postLogin = (event) =>{
 
   const logged = {username: logInUname, password:logInPassword};
   
-   axios.post('http://192.168.0.180:4000/login', logged)  // OR LOCALHOST!!
+   axios.post('http://192.168.0.145:4000/login', logged)  // OR LOCALHOST!!
   .then((response) =>{
     //alert("hi")
     if(response.data.status==="error") { return alert("Username and/or Password incorrect!")}
