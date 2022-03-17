@@ -43,7 +43,7 @@ function DealGame({isLoggedIn}) {
 
                 })      }
          </form>
-         <button type="button" onClick={deal}>Send Cards/Start Gane</button>
+         <button type="button" onClick={deal}>Send Cards/Start Game</button>
     </div>
   )
 }

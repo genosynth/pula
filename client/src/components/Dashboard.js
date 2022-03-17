@@ -7,8 +7,6 @@ import DealGame from './DealGame.js';
 
 function Dashboard({isLoggedIn, logOut}) {
 
- 
-
 
   if (isLoggedIn.username==="genju") return (
 
@@ -21,7 +19,7 @@ function Dashboard({isLoggedIn, logOut}) {
             <div className='ball-container'>
               <Cards cards={isLoggedIn.cards}/>
             </div>
-            <button className="btn btn-outline-light btn-lg px-5" type='button' ><a href="/dealgame">Deal</a></button>
+            <button className="btn btn-outline-light btn-lg px-5" type='button' onClick={()=>{window.location.href="/dealgame"}}>Deal</button>
             <Router>
           <Routes>
           <Route path="/dealgame"  element={<DealGame isLoggedIn={isLoggedIn}/>}/>

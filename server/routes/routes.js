@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const signUpTemplateCopy = require('../models/dbModel.js')
 const jwt = require("jsonwebtoken")
+const bcrypt = require("bcryptjs");
 const deal = require("../models/deal")
 
 router.get('/', (req, res) => {
@@ -10,17 +11,17 @@ router.get('/', (req, res) => {
 })
 
 
-router.post('/sign', (request, response) => {
+router.post('/sign', async(request, response) => {
     //response.send('send')
+    let hashedPassword = await bcrypt.hash(request.body.password, 8);
     const signedUpUser = new signUpTemplateCopy({
         //fullName: request.body.fullName,
         username: request.body.username,
-        password: request.body.password,
+        password: hashedPassword
         //email: request.body.email,
         //dob: request.body.dob
 
     })
-
     signedUpUser.save()
     .then (data => {
         console.log(data)
@@ -30,17 +31,17 @@ router.post('/sign', (request, response) => {
     .catch (error => {
         response.json(error)
         //console.log(error)
-    })
+    }) 
 })
 
 router.post('/login', async(request, response) => {
     //response.send('send')
    const user = await signUpTemplateCopy.findOne({
        username: request.body.username, 
-       password: request.body.password
+       //password: request.body.password
     })
 
-    if(user){
+    if(user && await bcrypt.compare(request.body.password, user.password)){
 
         const token = jwt.sign({
             username:user.username,
