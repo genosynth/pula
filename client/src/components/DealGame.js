@@ -11,6 +11,9 @@ function DealGame({isLoggedIn}) {
  
 
   const deal = (event) => {
+
+    let confirm = window.confirm("Are you sure you want to start a new game?")
+    if (!confirm) return 
     event.preventDefault()
       let users = 
     axios.post('http://192.168.0.145:4000/deal', usersForGame)    // OR LOCALHOST!!

@@ -46,6 +46,7 @@ router.post('/login', async(request, response) => {
         const token = jwt.sign({
             username:user.username,
             cards:user.cards,
+            message:user.message
             //email:user.email
         }, 'secretqwerty')
         console.log(user)
@@ -54,7 +55,7 @@ router.post('/login', async(request, response) => {
 
 })
 
-router.post('/deal', async (req, res)=> { // this is used to deal and distribute cards to players playing
+router.post('/deal', async (req, res)=> { // this is used to deal and distribute cards to players playing ADMIN ONLY GENJU
    
     let players = req.body
     
@@ -64,6 +65,11 @@ router.post('/deal', async (req, res)=> { // this is used to deal and distribute
 
      console.log(users)
     let results = deal(players.length)
+
+    let stringPlayers = ""
+    players.forEach((player)=>{
+        stringPlayers+=" - " + player
+    })
   
    if(users){
     let i = 0;
@@ -71,7 +77,8 @@ router.post('/deal', async (req, res)=> { // this is used to deal and distribute
         
         for (let z=0; z<players.length; z++){
             if (el.username === players[z]){
-                el.cards=results[i] 
+                el.cards=results[i]
+                el.message =`Current Players are${stringPlayers}`
                 i++
                 el.save()
                 return
@@ -79,6 +86,7 @@ router.post('/deal', async (req, res)=> { // this is used to deal and distribute
 
         }
         el.cards=[];
+        el.message = ""
         el.save()
         /*el.cards=results[i]        
         i+=1 */

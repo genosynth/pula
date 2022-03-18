@@ -31,6 +31,7 @@ function Dashboard({isLoggedIn, logOut}) {
         
       </div>
       </div>
+      <p style={{color: "white"}}>{isLoggedIn.message}</p>
       </div>
       
     </section>
@@ -51,6 +52,7 @@ function Dashboard({isLoggedIn, logOut}) {
         
       </div>
       </div>
+      <p style={{color: "white"}}>{isLoggedIn.message}</p>
       </div>
       
     </section>

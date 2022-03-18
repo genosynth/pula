@@ -10,7 +10,7 @@ import jwt from "jwt-decode"
 function App() {
 
   
-  let accounts = [{username:"genju", password:"genju", cards:[10,5]}, {username:"jacques", password:"jacques", cards:[11,5]}]
+  //let accounts = [{username:"genju", password:"genju", cards:[10,5]}, {username:"jacques", password:"jacques", cards:[11,5]}]
   
   const [isLoggedIn, changeLogInStatus] = useState(()=>{ //used to get the name of the logged in user
     const token = localStorage.getItem("pula")
@@ -47,7 +47,7 @@ function App() {
       
       <Router>
           <Routes>
-          <Route path="/"  element={<Login accounts={accounts}/>}/>
+          <Route path="/"  element={<Login />}/>
           <Route path="/register"  element={<Register/>}/>
           </Routes>
         </Router>

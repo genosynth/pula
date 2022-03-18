@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import ball1 from "../images/ball1.png"
 import ball2 from "../images/ball2.png"
 import ball3 from "../images/ball3.png"
@@ -19,9 +19,13 @@ const pics = [ball1,ball2,ball3,ball4,ball5,ball6,ball7,ball8,ball9,ball10,ball1
 
 
 function Card({card}) {
+
+  const [css, updateCss] = useState({visibility:"visible"}) 
+ 
+  
   return (
     <div className="ball-container"> 
-    <img alt={card} className="balls" src={pics[(card-1)]}/>
+    <img alt={card} style={css} className="balls" src={pics[(card-1)]} onClick={()=>{updateCss({visibility:"hidden"})}}/>
     </div>
   )
 }
