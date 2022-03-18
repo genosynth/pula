@@ -2,8 +2,9 @@ const express = require('express')
 const mongoose = require('mongoose')
 const dotenv = require('dotenv')
 const cors = require('cors')
+const path = require ('path')
 const routesUrls = require('./routes/routes')
-const port = 4000
+const port = process.env.PORT || 4000
 const app = express()
 
 dotenv.config()
@@ -13,6 +14,13 @@ mongoose.connect("mongodb+srv://test0db:1234@test0.psdbb.mongodb.net/pula?retryW
 })
 
 
+//app.use(express.static(path.join(__dirname + "/public"))) // this is the extra code
+app.use(express.static(path.join(__dirname, 'public')));
+
+// PATH CONFIGURATION TO RESPOND TO A REQUEST TO STATIC ROUTE REQUEST BY SERVING index.html
+app.get('/*', function (req, res) {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
 
 app.use(express.json())
 app.use(cors())

@@ -1,0 +1,29 @@
+{
+  "files": {
+    "main.css": "/static/css/main.1760b0ba.css",
+    "main.js": "/static/js/main.52ac1691.js",
+    "static/media/ball8.png": "/static/media/ball8.3c27eff32948dab78c71.png",
+    "static/media/ball6.png": "/static/media/ball6.5927c01de068c766017e.png",
+    "static/media/ball15.png": "/static/media/ball15.13ce33ba864bf3726a67.png",
+    "static/media/ball10.png": "/static/media/ball10.11a31d919a947afcfc17.png",
+    "static/media/plogo.png": "/static/media/plogo.d00c20f0abdd53fb0c43.png",
+    "static/media/ball5.png": "/static/media/ball5.5d264507a30f19079b51.png",
+    "static/media/ball3.png": "/static/media/ball3.3ae9fd46437a68840576.png",
+    "static/media/ball2.png": "/static/media/ball2.24c755251fbc3b50055b.png",
+    "static/media/ball4.png": "/static/media/ball4.a4355f9bc23a5ebad75d.png",
+    "static/media/ball1.png": "/static/media/ball1.7698351ce0aface232e5.png",
+    "static/media/ball13.png": "/static/media/ball13.9a86fc93ba588cbd267f.png",
+    "static/media/ball12.png": "/static/media/ball12.3fc6b7214461f1a0d1d1.png",
+    "static/media/ball9.png": "/static/media/ball9.7f0ad123ec50e3e7d76d.png",
+    "static/media/ball14.png": "/static/media/ball14.1789636a5382aed32367.png",
+    "static/media/ball7.png": "/static/media/ball7.34bdfec57b0d93f72ae3.png",
+    "static/media/ball11.png": "/static/media/ball11.8af7195d61bd3f9f441c.png",
+    "index.html": "/index.html",
+    "main.1760b0ba.css.map": "/static/css/main.1760b0ba.css.map",
+    "main.52ac1691.js.map": "/static/js/main.52ac1691.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.1760b0ba.css",
+    "static/js/main.52ac1691.js"
+  ]
+}
