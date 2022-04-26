@@ -16,8 +16,9 @@
             "request": "launch",
             "name": "Server",
             "runtimeExecutable": "nodemon",
-            "program": "${workspaceRoot}/Server/server.js",
+            "program": "${workspaceRoot}/server/server.js",
             "console": "integratedTerminal",
+            "envFile": "${workspaceFolder}/server/.env"
             
         }
  ]

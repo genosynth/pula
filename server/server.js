@@ -8,7 +8,7 @@ const port = process.env.PORT || 4000
 const app = express()
 
 dotenv.config()
-mongoose.connect("mongodb+srv://test0db:1234@test0.psdbb.mongodb.net/pula?retryWrites=true&w=majority", (error, result) =>{
+mongoose.connect(process.env.DATABASE_ACCESS, (error, result) =>{
     if (error) {return console.log(error)}
     else console.log("Database connected")
 })
